@@ -18,7 +18,7 @@ namespace OpenCVForUnityExample
     /// An example of detecting human face in a image of WebCamTexture using the CascadeClassifier class.
     /// http://docs.opencv.org/3.2.0/db/d28/tutorial_cascade_classifier.html
     /// </summary>
-    [RequireComponent(typeof(WebCamTextureToMatHelper))]
+    [RequireComponent(typeof(WebCamTexToOpenCV))]
     public class FaceDetect : MonoBehaviour
     {
         /// <summary>
@@ -44,7 +44,7 @@ namespace OpenCVForUnityExample
         /// <summary>
         /// The webcam texture to mat helper.
         /// </summary>
-        WebCamTextureToMatHelper webCamTextureToMatHelper;
+        WebCamTexToOpenCV webCamTextureToMatHelper;
 
         /// <summary>
         /// The FPS monitor.
@@ -67,7 +67,7 @@ namespace OpenCVForUnityExample
         {
             fpsMonitor = GetComponent<FpsMonitor>();
 
-            webCamTextureToMatHelper = gameObject.GetComponent<WebCamTextureToMatHelper>();
+            webCamTextureToMatHelper = gameObject.GetComponent<WebCamTexToOpenCV>();
 
 #if UNITY_WEBGL
             getFilePath_Coroutine = Utils.getFilePathAsync (LBP_CASCADE_FILENAME, (result) => {
