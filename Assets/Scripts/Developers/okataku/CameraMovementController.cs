@@ -12,6 +12,10 @@ public class CameraMovementController : MonoBehaviour
 
     private float _time;
     private Vector3 _currentPosition;
+    private Vector3 _nextPosition;
+
+
+    [SerializeField] private float _threshold = 0.5f;
     
     // Start is called before the first frame update
     private void Start()
@@ -30,13 +34,14 @@ public class CameraMovementController : MonoBehaviour
     private void Move()
     {
         transform.LookAt(_displayObject.transform);
-        if (_time > 0.5)
+        if (_time > _threshold)
         {
             _time = 0;
             _currentPosition = transform.position;
+            _nextPosition = new Vector3(-_faceDetect.faceX / 640, 0, 0);
         }
 
-        Vector3 cameraPosition = Vector3.Lerp(_currentPosition, new Vector3(-_faceDetect.faceX / 640, 0, 0), _time);
+        Vector3 cameraPosition = Vector3.Lerp(_currentPosition, _nextPosition, _time);
         transform.position = cameraPosition;
     }
 }
