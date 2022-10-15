@@ -12,6 +12,8 @@ public class CameraMovementController : MonoBehaviour
 
     private float _time;
     private Vector3 _currentPosition;
+
+    [SerializeField] private float _threshold = 0.8f;
     
     // Start is called before the first frame update
     private void Start()
@@ -30,7 +32,7 @@ public class CameraMovementController : MonoBehaviour
     private void Move()
     {
         transform.LookAt(_displayObject.transform);
-        if (_time > 0.5)
+        if (_time > _threshold)
         {
             _time = 0;
             _currentPosition = transform.position;
