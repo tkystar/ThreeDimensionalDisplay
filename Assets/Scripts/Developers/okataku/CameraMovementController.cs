@@ -9,8 +9,9 @@ public class CameraMovementController : MonoBehaviour
     // カメラが向く対象（バーチャルディスプレイの画面）
     [SerializeField] private GameObject _displayObject;
     [SerializeField] private FaceDetect _faceDetect;
-    
-    
+
+    private float _time;
+    private Vector3 _currentPosition;
     
     // Start is called before the first frame update
     private void Start()
@@ -21,6 +22,7 @@ public class CameraMovementController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        _time += Time.deltaTime;
         Move();
     }
 
@@ -28,6 +30,13 @@ public class CameraMovementController : MonoBehaviour
     private void Move()
     {
         transform.LookAt(_displayObject.transform);
-        transform.position = new Vector3(- _faceDetect.faceX / 640, 0, 0);
+        if (_time > 0.5)
+        {
+            _time = 0;
+            _currentPosition = transform.position;
+        }
+
+        Vector3 cameraPosition = Vector3.Lerp(_currentPosition, new Vector3(-_faceDetect.faceX / 640, 0, 0), _time);
+        transform.position = cameraPosition;
     }
 }
