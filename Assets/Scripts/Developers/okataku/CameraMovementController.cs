@@ -28,6 +28,6 @@ public class CameraMovementController : MonoBehaviour
     private void Move()
     {
         transform.LookAt(_displayObject.transform);
-        transform.position = new Vector3(_faceDetect.faceX / 640, 0, 0);
+        transform.position = new Vector3(- _faceDetect.faceX / 640, 0, 0);
     }
 }
